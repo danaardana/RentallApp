@@ -8,6 +8,8 @@ public class RentalApp {
     private Scanner scanner;
 
     public RentalApp() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
         availableBikes = new ArrayList<>();
         rentedBikes = new ArrayList<>();
         scanner = new Scanner(System.in);
@@ -19,6 +21,8 @@ public class RentalApp {
     }
 
     public void displayAvailableBikes() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
         System.out.println("===== Daftar Sepeda Tersedia =====");
         for (Bike bike : availableBikes) {
             if (!bike.isRented()) {
@@ -29,6 +33,15 @@ public class RentalApp {
     }
 
     public void rentBike() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+        System.out.println("===== Daftar Sepeda Tersedia =====");
+        for (Bike bike : availableBikes) {
+            if (!bike.isRented()) {
+                System.out.println("Sepeda ID: " + bike.getBikeId());
+            }
+        }
+        System.out.println();
         System.out.print("Masukkan ID Sepeda yang ingin disewa: ");
         String bikeId = scanner.next();
 
@@ -49,22 +62,35 @@ public class RentalApp {
     }
 
     public void returnBike() {
-        System.out.print("Masukkan ID Sepeda yang ingin dikembalikan: ");
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+        System.out.print("Masukkan ID Sepeda/Nama Penyewa yang ingin dikembalikan: ");
         String bikeId = scanner.next();
 
-        Bike selectedBike = findBikeById(bikeId, rentedBikes);
-        if (selectedBike != null) {
+        
+        if (findBikeById(bikeId, rentedBikes) != null) {
+            Bike selectedBike = findBikeById(bikeId, rentedBikes);
             selectedBike.setRented(false);
             rentedBikes.remove(selectedBike);
 
             System.out.println("Sepeda dengan ID " + selectedBike.getBikeId() + " telah dikembalikan.");
         } else {
-            System.out.println("Sepeda dengan ID " + bikeId + " tidak ditemukan atau belum disewa.");
+            if (findBikeByRenter(bikeId, rentedBikes) != null) {
+                Bike selectedBike = findBikeByRenter(bikeId, rentedBikes);
+                selectedBike.setRented(false);
+                rentedBikes.remove(selectedBike);
+
+                System.out.println("Sepeda dengan ID " + selectedBike.getBikeId() + " telah dikembalikan.");
+            } else {
+                System.out.println("Sepeda dengan ID " + bikeId + " tidak ditemukan atau belum disewa.");
+            }
         }
         System.out.println();
     }
 
     public void displayRentedBikes() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
         System.out.println("===== Daftar Penyewa Sepeda =====");
         if (rentedBikes.isEmpty()) {
             System.out.println("Tidak ada sepeda yang sedang disewa.");
@@ -76,9 +102,18 @@ public class RentalApp {
         System.out.println();
     }
 
-    private Bike findBikeById(String bikeId, List<Bike> bikeList) {
+    private Bike findBikeByRenter(String bikeId, List<Bike> bikeList) {
         for (Bike bike : bikeList) {
-            if (bike.getBikeId().equals(bikeId)) {
+            if (bike.getRenter().equals(bikeId)) {
+                return bike;
+            }
+        }
+        return null;
+    }
+
+    private Bike findBikeById(String renter, List<Bike> bikeList) {
+        for (Bike bike : bikeList) {
+            if (bike.getBikeId().equals(renter)) {
                 return bike;
             }
         }

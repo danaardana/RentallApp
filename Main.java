@@ -36,5 +36,7 @@ public class Main {
                     System.out.println("Pilihan tidak valid. Silakan pilih menu yang benar.");
             }
         } while (choice != 5);
+        scanner.close();
+        System.out.close();
     }
 }

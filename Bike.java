@@ -10,6 +10,10 @@ public class Bike {
 
     public String getBikeId() {
         return bikeId;
+    }   
+    
+    public String getRenter() {
+        return renterName;
     }
 
     public boolean isRented() {
