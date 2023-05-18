@@ -59,6 +59,7 @@ Berikut adalah list variable inti yang digunakan
 - [x] Pembaharuan list sepeda ketika sedang disewa
 - [x] Pengembalian sepeda menggunakan ID dan Nama penyewa
 - [ ] Perhitungan waktu penyewaan 
+- [ ] Tambah keterangan tambahan pada objek Bike, (Merk Sepeda, status penyewa, dll)
 
 
 ## Function Features
