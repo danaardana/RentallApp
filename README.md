@@ -42,7 +42,9 @@ Atau dapat dengan menekan tombol
 1. Code
 2. Download ZIP
 </details>
-### Variables
+
+
+## Variables
 
 Berikut adalah list variable inti yang digunakan
 
